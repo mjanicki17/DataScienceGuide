@@ -1,0 +1,66 @@
+---
+title: "DateGuide_Lesson2"
+author: "Milos Janicki"
+date: "9 November 2016"
+output: html_document
+---
+
+Task:  
+
+Now it is your turn. Use what you have learned from the iris dataset on a new one. The dataset is uploaded as a csv file on the following URL:  http://goo.gl/HKnl74. This is simulated data from an amusement park. For this exercise, make sure to write the report in an rmarkdown format for nicer presentation and sharing.
+
+
+Load data
+```{r}
+setwd('/Users/milosjanicki/Data_projects/Date_Guide/')
+apd <- read.csv('2.csv')
+```
+
+First Glance EDA
+```{r}
+summary(apd)
+str(apd)
+```
+
+Histograms, Corellation and Shapiro-Test for all variables
+```{r}
+par(mar=c(1,1,1,1)+0)
+
+attach(apd)
+par(mfrow=c(2,3), mai = c(1, 0.1, 0.1, 0.1))
+hist(num.child)
+hist(distance)
+hist(rides)
+qqnorm(num.child); qqline(num.child, col = 2)
+qqnorm(distance); qqline(distance, col = 2)
+qqnorm(rides); qqline(rides,col=2)
+shapiro.test(rides)
+shapiro.test(num.child)
+shapiro.test(distance)
+par(mfrow=c(2,3), mai = c(1, 0.1, 0.1, 0.1))
+hist(games)
+hist(wait)
+hist(clean)
+qqnorm(games); qqline(games, col = 2)
+qqnorm(wait); qqline(wait, col = 2)
+qqnorm(clean); qqline(clean,col=2)
+shapiro.test(games)
+shapiro.test(wait)
+shapiro.test(clean)
+hist(overall)
+qqnorm(overall); qqline(overall, col = 2)
+shapiro.test(overall)
+
+par(mfrow=c(1,1))
+boxplot(apd[,3:8])
+
+pairs(apd)
+
+library(GGally)
+ggpairs(apd)
+
+
+
+```
+
+

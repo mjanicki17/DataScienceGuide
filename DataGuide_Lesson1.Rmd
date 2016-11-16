@@ -1,0 +1,92 @@
+---
+title: "DataGuide_Lesson1"
+output: html_document
+author: Milos Janicki
+---
+
+
+Task:  
+1.Load in the mtcars dataset.  
+2.Use the exploratory functions you learned today to get an initial view.  
+3. Do histograms of the variables - are they normally distributed? Feel free to play around with the function parameters, to make the plots more beautiful. Hint: check the documentation of the function to check what parameters you can control.  
+4.Plot several plots next to each other.  
+5.Do the shapiro test to make sure what you see is right.  
+
+
+## 1.Load in the mtcars dataset.
+
+```{r}
+library(datasets)
+data(mtcars)
+```
+
+## 2. Use the exploratory functions you learned today to get an initial view.
+
+```{r}
+head(mtcars)
+summary(mtcars)
+str(mtcars)
+```
+
+
+## 3. Do histograms of the variables - are they normally distributed? Feel free to play around with the function parameters, to make the plots more beautiful. Hint: check the documentation of the function to check what parameters you can control.
+## 4.Plot several plots next to each other.
+## 5.Do the shapiro test to make sure what you see is right.
+
+```{r}
+par(mar=c(1,1,1,1)+0)
+
+attach(mtcars)
+par(mfrow=c(2,3), mai = c(1, 0.1, 0.1, 0.1))
+hist(mpg)
+hist(cyl)
+hist(disp)
+qqnorm(mpg); qqline(mpg, col = 2)
+qqnorm(cyl); qqline(cyl, col = 2)
+qqnorm(disp); qqline(disp, col = 2)
+shapiro.test(mpg)
+shapiro.test(cyl)
+shapiro.test(disp)
+par(mfrow=c(2,3))
+hist(hp)
+hist(drat)
+hist(wt)
+qqnorm(hp); qqline(hp, col = 2)
+qqnorm(drat); qqline(drat, col = 2)
+qqnorm(wt); qqline(wt, col = 2)
+shapiro.test(hp)
+shapiro.test(drat)
+shapiro.test(wt)
+par(mfrow=c(2,3), mai = c(1, 0.1, 0.1, 0.1))
+hist(qsec)
+hist(vs)
+hist(am)
+qqnorm(qsec); qqline(qsec, col = 2)
+qqnorm(vs); qqline(vs, col = 2)
+qqnorm(am); qqline(am, col = 2)
+shapiro.test(qsec)
+shapiro.test(vs)
+shapiro.test(am)
+par(mfrow=c(2,2))
+hist(carb)
+qqnorm(carb);qqline(carb,col=2)
+hist(gear)
+qqnorm(gear); qqline(gear, col = 2)
+shapiro.test(carb)
+shapiro.test(gear)
+```
+
+```{r}
+attach(mtcars)
+par(mfrow=c(2,2), mai = c(1, 0.1, 0.1, 0.1))
+plot(wt,mpg)
+plot(wt,qsec)
+plot(drat,wt)
+```
+
+
+
+##Conclusions:
+Variables 'disp' and 'hp' are not normally distributed since the p-value of Shapiro's test is lower than 0,05
+We can assume that other variables tested in this example are normally distributed
+
